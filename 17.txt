@@ -1,0 +1,37 @@
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import pickle
+
+df = pd.read_csv('Salary_data.csv')
+
+df.dropna(inplace=True)
+print(df.info())
+print(df.describe())
+
+features = df.iloc[:, [0]].values
+label = df.iloc[:, [1]].values
+
+x_train, x_test, y_train, y_test = train_test_split(
+    features, label, test_size=0.2, random_state=42
+)
+
+model = LinearRegression()
+model.fit(x_train, y_train)
+
+print("Training score:", model.score(x_train, y_train))
+print("Testing score:", model.score(x_test, y_test))
+print("Coefficient:", model.coef_)
+print("Intercept:", model.intercept_)
+
+pickle.dump(model, open('SalaryPred.model', 'wb'))
+
+model = pickle.load(open('SalaryPred.model', 'rb'))
+
+yr_of_exp = float(input("Enter Years of Experience: "))
+yr_array = np.array([[yr_of_exp]])
+
+salary = model.predict(yr_array)
+print("Estimated Salary:", salary)

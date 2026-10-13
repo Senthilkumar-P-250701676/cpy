@@ -1,0 +1,40 @@
+```python
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+tips = sns.load_dataset('tips')
+
+print(tips.head())
+
+sns.displot(tips.total_bill, kde=True)
+sns.displot(tips.total_bill, kde=False)
+
+sns.jointplot(x=tips.tip, y=tips.total_bill)
+sns.jointplot(x=tips.tip, y=tips.total_bill, kind='reg')
+sns.jointplot(x=tips.tip, y=tips.total_bill, kind='hex')
+
+sns.pairplot(tips)
+sns.pairplot(tips, hue='time')
+sns.pairplot(tips, hue='day')
+
+print(tips.time.value_counts())
+
+sns.heatmap(tips.corr(numeric_only=True), annot=True)
+
+sns.boxplot(x=tips.total_bill)
+sns.boxplot(x=tips.tip)
+
+sns.countplot(x=tips.day)
+sns.countplot(x=tips.sex)
+
+tips.sex.value_counts().plot(kind='pie')
+plt.show()
+
+tips.sex.value_counts().plot(kind='bar')
+plt.show()
+
+sns.countplot(x=tips[tips.time == 'Dinner']['day'])
+plt.show()
+```

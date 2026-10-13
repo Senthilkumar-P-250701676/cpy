@@ -1,0 +1,51 @@
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.cluster import KMeans
+
+df = pd.read_csv('Mall_Customers.csv')
+
+print(df.info())
+print(df.head())
+
+sns.pairplot(df)
+
+# Select Annual Income and Spending Score
+features = df.iloc[:, [3, 4]].values
+
+# Create and train the model
+model = KMeans(n_clusters=5, random_state=42, n_init=10)
+model.fit(features)
+
+# Add cluster labels
+Final = df.iloc[:, [3, 4]].copy()
+Final['label'] = model.predict(features)
+
+print(Final.head())
+
+# Plot the clusters
+sns.set_style("whitegrid")
+
+sns.FacetGrid(Final, hue="label", height=6) \
+    .map(plt.scatter, "Annual Income (k$)",
+         "Spending Score (1-100)") \
+    .add_legend()
+
+plt.show()
+
+# Elbow method
+features_el = df.iloc[:, [2, 3, 4]].values
+wcss = []
+
+for i in range(1, 10):
+    model = KMeans(n_clusters=i, random_state=42, n_init=10)
+    model.fit(features_el)
+    wcss.append(model.inertia_)
+
+plt.plot(range(1, 10), wcss, marker='o')
+plt.xlabel("Number of Clusters")
+plt.ylabel("WCSS")
+plt.show()

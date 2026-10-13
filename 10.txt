@@ -1,0 +1,25 @@
+```python
+import numpy as np
+
+array = np.random.randint(1, 100, 9)
+print(array)
+
+print(np.sqrt(array))
+print(array.ndim)
+
+new_array = array.reshape(3, 3)
+print(new_array)
+print(new_array.ndim)
+
+print(new_array.ravel())
+
+newm = new_array.reshape(3, 3)
+print(newm)
+
+print(newm[2, 1:3])
+print(newm[1:2, 1:3])
+print(new_array[0:3, 0:0])
+print(new_array[0:2, 0:1])
+print(new_array[0:3, 0:1])
+print(new_array[1:3])
+```

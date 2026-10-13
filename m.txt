@@ -1,0 +1,544 @@
+FDS LAB MANUAL — FUNCTION REFERENCE
+Experiments 1–20 | Functions, methods, and common commands used
+
+Note:
+This is a consolidated study reference based on the FDS lab manual and the experiment explanations. Some items are Python syntax or operators rather than functions. Dataset-specific column names and filenames must match your actual files.
+
+============================================================
+1. PYTHON BASICS
+============================================================
+
+print(...)
+    Displays text, values, or results.
+
+input("prompt")
+    Reads text entered by the user. Convert it with int(...) or float(...) when needed.
+
+int(value)
+    Converts a value to an integer when possible.
+
+float(value)
+    Converts a value to a floating-point number.
+
+str(value)
+    Converts a value to a string.
+
+len(object)
+    Returns the number of items in an object.
+
+range(start, stop, step)
+    Generates a sequence of integers. The stop value is excluded.
+
+format(...)
+    Inserts values into a formatted string. Example: "Value: {}".format(x).
+
+type(object)
+    Returns the object's type.
+
+list(iterable)
+    Creates a list from an iterable.
+
+enumerate(iterable)
+    Iterates over items while also providing their index.
+
+============================================================
+2. NUMPY (import numpy as np)
+============================================================
+
+np.array(data)
+    Creates a NumPy array from a list or other sequence.
+
+np.arange(start, stop, step)
+    Creates values in a range; stop is excluded.
+
+np.zeros(shape)
+    Creates an array filled with zeros.
+
+np.ones(shape)
+    Creates an array filled with ones.
+
+np.random.rand(...)
+    Generates random values from a uniform distribution between 0 and 1.
+
+np.random.randint(low, high, size)
+    Generates random integers; high is excluded.
+
+np.random.normal(loc, scale, size)
+    Generates random values from a normal distribution.
+
+np.mean(array)
+    Calculates the mean.
+
+np.median(array)
+    Calculates the median.
+
+np.std(array)
+    Calculates standard deviation.
+
+np.min(array) / array.min()
+    Returns the minimum value.
+
+np.max(array) / array.max()
+    Returns the maximum value.
+
+np.percentile(array, q)
+    Returns the value at percentile q (for example, q=25 or q=75).
+
+np.unique(array)
+    Returns unique values.
+
+np.isnan(array)
+    Identifies NaN (missing numeric) values.
+
+np.where(condition, x, y)
+    Selects x where condition is true and y otherwise.
+
+np.concatenate((a, b), axis=...)
+    Joins arrays along an existing axis.
+
+np.vstack((a, b))
+    Stacks arrays vertically (row-wise).
+
+np.hstack((a, b))
+    Stacks arrays horizontally.
+
+np.dot(a, b)
+    Computes a dot product / matrix product where dimensions allow.
+
+a @ b
+    Operator for matrix multiplication.
+
+array.reshape(shape)
+    Changes an array's shape without changing its data when possible.
+
+array.shape
+    Attribute showing array dimensions.
+
+array.dtype
+    Attribute showing array data type.
+
+array.T
+    Attribute returning the transpose.
+
+np.save(filename, array)
+    Saves a NumPy array to a .npy file.
+
+np.load(filename)
+    Loads an array saved in a .npy file.
+
+np.nan
+    Special value used to represent a missing numeric value.
+
+np.nanmean(array)
+    Calculates the mean while ignoring NaN values.
+
+============================================================
+3. PANDAS (import pandas as pd)
+============================================================
+
+pd.read_csv(filename)
+    Reads a CSV file into a DataFrame.
+
+pd.DataFrame(data)
+    Creates a DataFrame from data.
+
+df.head(n)
+    Displays the first n rows; defaults to 5.
+
+df.tail(n)
+    Displays the last n rows; defaults to 5.
+
+df.info()
+    Shows column names, non-null counts, and data types.
+
+df.describe()
+    Shows descriptive statistics for numeric columns by default.
+
+df.shape
+    Attribute returning (number of rows, number of columns).
+
+df.columns
+    Attribute containing column names.
+
+df.dtypes
+    Attribute containing each column's data type.
+
+df['column']
+    Selects one column as a Series.
+
+df[['col1', 'col2']]
+    Selects multiple columns as a DataFrame.
+
+df.iloc[rows, columns]
+    Selects data by integer position. Example: df.iloc[:, :-1] selects all rows and all columns except the last.
+
+df.loc[rows, columns]
+    Selects data by row/column labels or Boolean conditions.
+
+df.dropna()
+    Removes rows with missing values by default.
+
+df.fillna(value)
+    Replaces missing values with a supplied value.
+
+df.duplicated()
+    Returns True for duplicate rows after the first occurrence.
+
+df.drop_duplicates()
+    Removes duplicate rows.
+
+df.drop(columns=[...])
+    Removes specified columns.
+
+df.set_index(column)
+    Sets a column as the DataFrame index.
+
+df.reset_index()
+    Resets the index.
+
+df.rename(columns={old: new})
+    Renames columns.
+
+df.sort_values(by, ascending=True)
+    Sorts rows by a column. Use ascending=False for descending order.
+
+df.value_counts()
+    Counts occurrences of values in a Series.
+
+df.groupby(column)
+    Groups rows by a column for aggregation.
+
+df.mean()
+    Calculates column means where applicable.
+
+df.median()
+    Calculates column medians where applicable.
+
+df.mode()
+    Returns the most frequent value(s).
+
+df.unique()
+    Returns unique values in a Series.
+
+df.nunique()
+    Counts unique values in a Series.
+
+df.replace(old, new)
+    Replaces matching values.
+
+df.apply(function)
+    Applies a function along an axis or to Series values.
+
+df.map(mapping_or_function)
+    Maps values in a Series using a dictionary or function.
+
+pd.get_dummies(series)
+    Converts categorical values into one-hot/dummy columns.
+
+df.corr(numeric_only=True)
+    Calculates correlations between numeric columns.
+
+df.to_csv(filename, index=False)
+    Writes a DataFrame to a CSV file without saving the index.
+
+df['column'].isna()
+    Identifies missing values in a column.
+
+df['column'].notna()
+    Identifies non-missing values in a column.
+
+df['column'].fillna(df['column'].mode()[0])
+    Fills missing categorical values with the most frequent value.
+
+============================================================
+4. MATPLOTLIB (import matplotlib.pyplot as plt)
+============================================================
+
+plt.plot(x, y)
+    Creates a line plot.
+
+plt.scatter(x, y)
+    Creates a scatter plot.
+
+plt.bar(x, height)
+    Creates a bar chart.
+
+plt.hist(data, bins=...)
+    Creates a histogram.
+
+plt.boxplot(data)
+    Creates a box plot.
+
+plt.pie(values, labels=...)
+    Creates a pie chart.
+
+plt.imshow(data)
+    Displays a 2D array as an image; often used for simple heatmaps.
+
+plt.figure(figsize=(width, height))
+    Creates a figure with a specified size.
+
+plt.subplots(rows, columns)
+    Creates a figure and one or more axes.
+
+plt.xlabel(text) / plt.ylabel(text)
+    Sets axis labels.
+
+plt.title(text)
+    Sets the plot title.
+
+plt.legend()
+    Displays a legend.
+
+plt.grid(True)
+    Displays grid lines.
+
+plt.xscale('log') / plt.yscale('log')
+    Sets a logarithmic axis scale.
+
+plt.errorbar(x, y, yerr=...)
+    Plots data with error bars.
+
+plt.fill_between(x, y1, y2)
+    Fills the area between two curves.
+
+plt.annotate(text, xy=..., xytext=...)
+    Adds an annotation to a plot.
+
+plt.savefig(filename)
+    Saves the current figure.
+
+plt.show()
+    Displays the plot.
+
+============================================================
+5. SEABORN (import seaborn as sns)
+============================================================
+
+sns.set_style(style)
+    Sets a plotting style, such as "whitegrid".
+
+sns.displot(data, kde=False/True)
+    Creates a distribution plot, optionally with a KDE curve.
+
+sns.histplot(data, kde=False/True)
+    Creates a histogram, optionally with a KDE curve.
+
+sns.kdeplot(data)
+    Displays a kernel density estimate.
+
+sns.jointplot(x=..., y=..., data=df, kind=...)
+    Shows the relationship between two variables and their distributions.
+
+sns.pairplot(df, hue=...)
+    Creates pairwise plots for columns in a DataFrame.
+
+sns.heatmap(data, annot=True)
+    Displays values as a heatmap; annot=True writes values in cells.
+
+sns.boxplot(x=..., y=..., data=df)
+    Creates a box plot, often useful for comparing distributions.
+
+sns.countplot(x=..., data=df)
+    Displays counts for categorical values.
+
+sns.barplot(x=..., y=..., data=df)
+    Displays an aggregated value for categories.
+
+sns.FacetGrid(data, hue=..., height=...)
+    Creates a grid used for plotting subsets/groups.
+
+sns.distplot(data)
+    Older distribution-plot function appearing in some manuals; deprecated in newer Seaborn. Prefer histplot or displot.
+
+============================================================
+6. PYTHON / DATA CLEANING EXPRESSIONS
+============================================================
+
+condition
+    A Boolean expression such as df['Age'] < 0.
+
+(df['Age'] < 0) | (df['Age'] > 100)
+    | means element-wise OR for pandas/NumPy conditions.
+
+(condition1) & (condition2)
+    & means element-wise AND for pandas/NumPy conditions.
+
+~condition
+    Element-wise NOT; commonly used to invert a Boolean mask.
+
+df.loc[condition, 'column'] = np.nan
+    Replaces values matching a condition with NaN.
+
+array[(array > lower) & (array < upper)]
+    Boolean filtering: keeps values satisfying both conditions.
+
+IQR = Q3 - Q1
+    Interquartile range; Q1 is the 25th percentile and Q3 is the 75th percentile.
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+    Common IQR rule for flagging potential outliers.
+
+============================================================
+7. SCIKIT-LEARN: PREPROCESSING
+============================================================
+
+from sklearn.impute import SimpleImputer
+SimpleImputer(strategy='mean')
+    Creates an imputer that replaces missing numeric values with the mean.
+
+SimpleImputer(strategy='median')
+    Replaces missing numeric values with the median.
+
+imputer.fit(data)
+    Learns replacement statistics from data.
+
+imputer.transform(data)
+    Applies the learned replacement to data.
+
+imputer.fit_transform(data)
+    Learns replacement statistics and transforms data in one step.
+
+from sklearn.preprocessing import OneHotEncoder
+OneHotEncoder(sparse_output=False)
+    Converts categorical values into one-hot columns. In older scikit-learn versions, sparse=False was used.
+
+from sklearn.preprocessing import StandardScaler
+StandardScaler()
+    Creates a scaler that standardizes features using learned mean and standard deviation.
+
+from sklearn.preprocessing import MinMaxScaler
+MinMaxScaler(feature_range=(0, 1))
+    Creates a scaler that maps features to a chosen range, usually 0 to 1.
+
+scaler.fit(data)
+    Learns scaling parameters from data.
+
+scaler.transform(data)
+    Applies the learned scaling parameters.
+
+scaler.fit_transform(data)
+    Learns parameters and scales data in one step.
+
+============================================================
+8. SCIKIT-LEARN: TRAINING AND TESTING
+============================================================
+
+from sklearn.model_selection import train_test_split
+train_test_split(X, y, test_size=0.2, random_state=42)
+    Splits features X and labels y into training and testing subsets. test_size=0.2 means 20% test data.
+
+model.fit(X_train, y_train)
+    Trains/fits the model using training data.
+
+model.predict(X)
+    Predicts outputs/classes for the supplied features.
+
+model.score(X, y)
+    Returns the estimator's default score. For LinearRegression this is R-squared; for classifiers it is accuracy.
+
+============================================================
+9. LINEAR REGRESSION
+============================================================
+
+from sklearn.linear_model import LinearRegression
+LinearRegression()
+    Creates a linear regression model for predicting continuous values.
+
+model.coef_
+    Attribute containing learned coefficient(s).
+
+model.intercept_
+    Attribute containing the learned intercept.
+
+============================================================
+10. K-NEAREST NEIGHBOURS (KNN)
+============================================================
+
+from sklearn.neighbors import KNeighborsClassifier
+KNeighborsClassifier(n_neighbors=5)
+    Creates a KNN classifier using the five nearest neighbours.
+
+============================================================
+11. LOGISTIC REGRESSION
+============================================================
+
+from sklearn.linear_model import LogisticRegression
+LogisticRegression(max_iter=1000)
+    Creates a logistic-regression classifier. max_iter sets the maximum solver iterations.
+
+============================================================
+12. MODEL EVALUATION
+============================================================
+
+from sklearn.metrics import confusion_matrix
+confusion_matrix(y_true, y_pred)
+    Counts correct and incorrect predictions by class.
+
+from sklearn.metrics import classification_report
+classification_report(y_true, y_pred)
+    Reports precision, recall, F1-score and support for each class.
+
+============================================================
+13. K-MEANS CLUSTERING
+============================================================
+
+from sklearn.cluster import KMeans
+KMeans(n_clusters=5, random_state=42, n_init=10)
+    Creates a K-Means clustering model. n_clusters is the number of clusters.
+
+model.inertia_
+    Attribute containing within-cluster sum of squared distances (WCSS).
+
+============================================================
+14. SAVING AND LOADING MODELS
+============================================================
+
+import pickle
+pickle.dump(model, open('model_file.model', 'wb'))
+    Saves a fitted model to a binary file.
+
+pickle.load(open('model_file.model', 'rb'))
+    Loads a model saved with pickle.
+
+'wb'
+    File mode for writing binary data.
+
+'rb'
+    File mode for reading binary data.
+
+============================================================
+15. COMMON OPERATORS / ATTRIBUTES USED IN THE LAB
+============================================================
+
+=
+    Assignment operator.
+
+==
+    Equality comparison.
+
+<, >, <=, >=, !=
+    Comparison operators.
+
++, -, *, /, **
+    Arithmetic operators; ** means exponentiation.
+
+:
+    In slicing, selects a range. Example: df.iloc[:, 0] selects all rows of column 0.
+
+-1 in slicing
+    Often means the last position. Example: df.iloc[:, :-1] selects all columns except the last.
+
+.values
+    Converts a pandas selection to a NumPy array.
+
+.inplace=True
+    Requests that a pandas operation modify the object rather than return a separate result. Some newer pandas patterns prefer assignment instead.
+
+.fill_amount / .shape / .dtype / .columns / .coef_ / .intercept_ / .inertia_
+    These are attributes or properties, not functions; they are accessed without parentheses.
+
+============================================================
+END OF REFERENCE
+============================================================

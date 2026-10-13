@@ -1,0 +1,34 @@
+```python
+import numpy as np
+import seaborn as sns
+
+array = np.random.randint(1, 100, 16)
+
+print(array.mean())
+print(np.percentile(array, 25))
+print(np.percentile(array, 50))
+print(np.percentile(array, 75))
+print(np.percentile(array, 100))
+
+def outDetection(array):
+    Q1, Q3 = np.percentile(array, [25, 75])
+    IQR = Q3 - Q1
+    lr = Q1 - (1.5 * IQR)
+    ur = Q3 + (1.5 * IQR)
+    return lr, ur
+
+lr, ur = outDetection(array)
+
+sns.displot(array)
+
+new_array = array[(array > lr) & (array < ur)]
+sns.displot(new_array)
+
+lr1, ur1 = outDetection(new_array)
+
+final_array = new_array[
+    (new_array > lr1) & (new_array < ur1)
+]
+
+sns.displot(final_array)
+```

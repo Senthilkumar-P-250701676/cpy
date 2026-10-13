@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+diabetes_df = pd.read_csv("diabetes.csv")
+
+print(diabetes_df.head())
+
+diabetes_df.info()
+print(diabetes_df.describe())
+
+diabetes_df.hist(bins=50, figsize=(20, 15))
+plt.show()
+
+sns.pairplot(diabetes_df)
+plt.show()
+```
